@@ -1,1 +1,74 @@
+---
+title: "User Guide for SELR"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{User Guide for SELR}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+```{r setup}
+library(SELR)
+```
+
+## overview
+SELR package is written to implement two types of estimators based on:  
+`simultaneous logistic regression` and `efficient logistic regression`. 
+Designing for ordinal data, they are highly efficient for cumulative odds and 
+adjacent odds and efficient for continuation ratio. By extending individualized 
+logistic regression, the models could be viewed as a set of logistic regressions 
+at different levels. Different binary comparisons are controlled by using 
+different `risk` and `target` sets. SELR package extends `geeglm` from `geepack` 
+package. For more information about `geeglm`, please see `geepack` documentation. 
+
+
+## how does selr preprocess data?
+SELR preprocess data by repeating input data set by `S-1` times and assigning `weights`,
+`levmod`, and 0 or 1 responses for each level. Preprocess data could be viewed
+in `selr` returned model values, and the original input data could be viewed in
+`data` value.
+
+
+## about standard models
+Except the commonly used three ordinal models: cumulative, sequential, adjacent, 
+baseline, and continuation ratio models, two item response theory models: two level, 
+and binary splits models are implemented in `selr`. Two level model specifies
+$P(Y\geq2|x)=P(Y\geq{k/2+1}|x)=F(\beta_0+x^T\beta)$ where $S_1=\{1,...,k/2\}$ and
+$S_2=\{k/2+1,...,k\}$. Binary splits model specifies $P(Y\in{S_1}|Y\in{S})$ and
+$P(Y\in{S_2}|Y\in{S})$ for each binary split step. 
+
+
+## about `risk`, `target`, and `Z`
+SELR algorithm requires either `risk` and `target` or `Z` to be assigned. To use
+the argument properly, please ensure the order of levels of response data matches
+with the order of `risk`, `target`, and `Z`.
+
+## setting `elr = TRUE`
+Since ELR is using "unstructured" correlation structure in `geeglm`, it should 
+be used with more consideration. For more information, please see `geeglm`.
+
+
+## setting `ordinal = FALSE`
+Although the models are designed for ordinal data, they can be used when comparing
+nominal data. SELR will force to assign the `y` argument to match the level of
+response with `risk` and `target` sets for binary comparisons. 
+
+
+## reference
+Fu, L., & Simpson, D. G. (2002). Conditional risk models for ordinal response data:
+simultaneous logistic regression analysis and generalized score tests.
+Journal of Statistical Planning and Inference, 108(1–2), 201–217.
+https://doi.org/10.1016/s0378-3758(02)00279-3
+
+Tutz, G. (2021). Ordinal regression: A review and a taxonomy of models. Wiley Interdisciplinary Reviews: Computational Statistics, 14(2). https://doi.org/10.1002/wics.1545
+
+
 
