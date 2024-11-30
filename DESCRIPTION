@@ -1,0 +1,25 @@
+Package: SELR
+Type: Package
+Title: Simultaneous and Efficient Logistic Regressions
+Version: 0.1.0
+Author: Jiyang Xu <jiyangx3@illinois.edu>, 
+        Douglas Simpson <dgs@illinois.edu>
+Maintainer: Jiyang Xu <jiyangx3@illinois.edu>
+Description: Simultaneous logistic regression (SLR) and Efficient logistic regression (ELR), see more detail from Fu and Simpson <https://doi.org/10.1016/S0378-3758(02)00279-3>.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.3.2
+Depends: 
+    R (>= 3.5.0),
+    methods,
+    geepack
+Imports:
+    MESS, MASS, pROC, tidyr, glmnet
+Suggests: 
+    knitr,
+    rmarkdown,
+    spelling
+VignetteBuilder: knitr
+Language: en-US
+cph: Jiyang Xu, Douglas Simpson
